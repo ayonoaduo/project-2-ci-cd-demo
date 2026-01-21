@@ -1,46 +1,51 @@
 name: CI/CD Pipeline
 
+# Triggers the workflow when a push is made to the main branch
 on:
   push:
     branches: [ "main" ]
 
+# Permissions for the workflow
 permissions:
   contents: read
   pages: write
   id-token: write
-
+# Jobs for the workflow
 jobs:
+
   build-and-deploy:
     runs-on: ubuntu-latest
-
+# Environment for the job
     environment:
       name: github-pages
-      
+
     steps:
+# Checkout the repository
       - name: Checkout
         uses: actions/checkout@v4
-
+# Setup Node for the job
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 18
-
+# Install dependencies for the job
       - name: Install dependencies
         run: npm install
-
+# Lint the code for the job
       - name: Lint
         run: npm run lint
-
+# Test the code for the job
       - name: Test
         run: npm run test
+# Build the code for the job
 
       - name: Build
         run: npm run build
-
+# Upload Pages artifact for the job
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist
-
+# Deploy to GitHub Pages for the job
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
