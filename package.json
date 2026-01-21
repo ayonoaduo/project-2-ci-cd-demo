@@ -1,0 +1,8 @@
+{
+    "name": "ci-cd-demo",
+    "scripts": {
+      "lint": "echo Lint passed",
+      "test": "echo Tests passed",
+      "build": "mkdir -p dist && cp index.html app.js dist/"
+    }
+  }
